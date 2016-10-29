@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "816600628586",
+    "firebase_url": "https://urba-mecanica.firebaseio.com",
+    "project_id": "urba-mecanica",
+    "storage_bucket": "urba-mecanica.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816600628586:android:9fb5edab94317938",
+        "android_client_info": {
+          "package_name": "es.zinitri.urbamecanica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816600628586-kf44tm281oli4nd7dj849fl6u33dpr4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAn9wXttveOYy5lGbL3BIJ8YTjU2js1Do"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
