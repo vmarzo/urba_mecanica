@@ -20,6 +20,7 @@
         android:gravity="center"
         android:text="Urba Mecanica - Galachos" />
     <LinearLayout
+        android:id="@+id/fila_fecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -45,10 +46,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Pabellon: Goya" />
+        android:text="Pabellon: Goya"
+        android:layout_marginTop="16dp"
+        android:layout_alignTop="@id/fila_fecha"/>
     <Button
         android:id="@+id/btn_mapa"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/btn_mapa"
+        android:layout_alignTop="@id/txt_pabellon"/>/>
 </RelativeLayout>
