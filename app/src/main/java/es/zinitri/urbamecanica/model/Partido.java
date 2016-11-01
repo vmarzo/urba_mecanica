@@ -1,5 +1,8 @@
 package es.zinitri.urbamecanica.model;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by victor on 1/11/16.
  */
@@ -9,14 +12,14 @@ public class Partido {
     private boolean casa;
     private int golesUM;
     private int golesRival;
-    private long fecha;
+    private Long fecha;
     private String hora;
     private String pabellon;
 
     public Partido() {
     }
 
-    public Partido(String rival, boolean casa, int golesUM, int golesRival, long fecha, String hora, String pabellon) {
+    public Partido(String rival, boolean casa, int golesUM, int golesRival, Long fecha, String hora, String pabellon) {
         this.rival = rival;
         this.casa = casa;
         this.golesUM = golesUM;
@@ -42,8 +45,9 @@ public class Partido {
         return golesRival;
     }
 
-    public long getFecha() {
-        return fecha;
+    public String getFecha() {
+        String string  =  new SimpleDateFormat("dd-MM-yyyy").format(new Timestamp(fecha*1000));
+        return string;
     }
 
     public String getHora() {

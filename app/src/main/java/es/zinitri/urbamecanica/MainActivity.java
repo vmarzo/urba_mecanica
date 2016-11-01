@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 TxtHora=(TextView)findViewById(R.id.txt_hora);
                 TxtPabellon=(TextView)findViewById(R.id.txt_pabellon);
                 TxtProxPartido.setText(partido.getRival());
-                //TxtFecha.setText(partido.getFecha());
+                TxtFecha.setText(partido.getFecha());
                 TxtHora.setText(partido.getHora());
                 TxtPabellon.setText(partido.getPabellon());
             }
