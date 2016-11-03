@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import es.zinitri.urbamecanica.model.Partido;
+import es.zinitri.urbamecanica.utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
     TextView TxtProxPartido;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference RefPartido = database.getReference("calendario/j1");
+        DatabaseReference RefPartido = database.getReference(Constants.FIREBASE_LOCATION_CALENDARIO+"/j1");
         RefPartido.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -55,8 +56,14 @@ public class MainActivity extends AppCompatActivity {
                 TxtFecha=(TextView)findViewById(R.id.txt_fecha);
                 TxtHora=(TextView)findViewById(R.id.txt_hora);
                 TxtPabellon=(TextView)findViewById(R.id.txt_pabellon);
-
-                TxtProxPartido.setText(partido.getRival());
+                if(partido.isCasa())
+                {
+                    TxtProxPartido.setText(Constants.EQUIPO + " - " + partido.getRival());
+                }
+                else
+                {
+                    TxtProxPartido.setText(partido.getRival() + " - " + Constants.EQUIPO);
+                }
                 TxtFecha.setText(partido.getFecha());
                 TxtHora.setText(partido.getHora());
                 TxtPabellon.setText(partido.getPabellon());

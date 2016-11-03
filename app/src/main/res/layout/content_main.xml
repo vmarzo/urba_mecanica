@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Urba Mecanica - Galachos" />
+        android:text="-" />
     <LinearLayout
         android:id="@+id/fila_fecha"
         android:layout_width="match_parent"
@@ -33,14 +33,13 @@
             android:layout_weight="0.25"
             android:gravity="right"
             android:textStyle="bold"
-            android:text="Fecha: "/>
+            android:text="@string/fecha"/>
         <TextView
             android:id="@+id/txt_fecha"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
-            android:gravity="left"
-            android:text="22/10/2016" />
+            android:gravity="left" />
         <TextView
             android:id="@+id/lbl_hora"
             android:layout_width="0dp"
@@ -48,14 +47,13 @@
             android:layout_weight="0.25"
             android:gravity="right"
             android:textStyle="bold"
-            android:text="Hora: "/>
+            android:text="@string/hora"/>
         <TextView
             android:id="@+id/txt_hora"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
-            android:gravity="left"
-            android:text="18:00" />
+            android:gravity="left" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/fila_pabellon"
@@ -69,7 +67,7 @@
             android:id="@+id/lbl_pabellon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Pabellon: "
+            android:text="@string/pabellon"
             android:layout_weight="0.5"
             android:gravity="right"
             android:textStyle="bold"/>
@@ -77,7 +75,6 @@
             android:id="@+id/txt_pabellon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Goya"
             android:layout_weight="0.5"
             android:gravity="left"/>
     </LinearLayout>
