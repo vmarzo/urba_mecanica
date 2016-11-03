@@ -50,10 +50,12 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
                 Partido partido = dataSnapshot.getValue(Partido.class);
+
                 TxtProxPartido=(TextView)findViewById(R.id.txt_prox_partido);
                 TxtFecha=(TextView)findViewById(R.id.txt_fecha);
                 TxtHora=(TextView)findViewById(R.id.txt_hora);
                 TxtPabellon=(TextView)findViewById(R.id.txt_pabellon);
+
                 TxtProxPartido.setText(partido.getRival());
                 TxtFecha.setText(partido.getFecha());
                 TxtHora.setText(partido.getHora());

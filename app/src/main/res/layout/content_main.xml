@@ -27,28 +27,60 @@
         android:orientation="horizontal"
         android:weightSum="1">
         <TextView
+            android:id="@+id/lbl_fecha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:text="Fecha: "/>
+        <TextView
             android:id="@+id/txt_fecha"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:text="Fecha: 22/10/2016" />
+            android:layout_weight="0.25"
+            android:gravity="left"
+            android:text="22/10/2016" />
+        <TextView
+            android:id="@+id/lbl_hora"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:text="Hora: "/>
         <TextView
             android:id="@+id/txt_hora"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:text="Hora: 18:00" />
+            android:layout_weight="0.25"
+            android:gravity="left"
+            android:text="18:00" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/txt_pabellon"
+    <LinearLayout
+        android:id="@+id/fila_pabellon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Pabellon: Goya"
+        android:layout_below="@id/fila_fecha"
         android:layout_marginTop="16dp"
-        android:layout_alignTop="@id/fila_fecha"/>
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <TextView
+            android:id="@+id/lbl_pabellon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pabellon: "
+            android:layout_weight="0.5"
+            android:gravity="right"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txt_pabellon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Goya"
+            android:layout_weight="0.5"
+            android:gravity="left"/>
+    </LinearLayout>
     <Button
         android:id="@+id/btn_mapa"
         android:layout_centerHorizontal="true"
@@ -56,5 +88,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/btn_mapa"
-        android:layout_alignTop="@id/txt_pabellon"/>/>
+        android:layout_below="@id/fila_pabellon"/>
+    />
 </RelativeLayout>
