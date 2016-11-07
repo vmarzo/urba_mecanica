@@ -13,18 +13,22 @@ public class Partido {
     private int golesUM;
     private int golesRival;
     private Long fecha;
+    private Long latitud;
+    private Long longitud;
     private String hora;
     private String pabellon;
 
     public Partido() {
     }
 
-    public Partido(String rival, boolean casa, int golesUM, int golesRival, Long fecha, String hora, String pabellon) {
+    public Partido(String rival, boolean casa, int golesUM, int golesRival, Long fecha, Long latitud, Long longitud, String hora, String pabellon) {
         this.rival = rival;
         this.casa = casa;
         this.golesUM = golesUM;
         this.golesRival = golesRival;
         this.fecha = fecha;
+        this.latitud = latitud;
+        this.longitud = longitud;
         this.hora = hora;
         this.pabellon = pabellon;
     }

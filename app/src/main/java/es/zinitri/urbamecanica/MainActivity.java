@@ -10,21 +10,27 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import es.zinitri.urbamecanica.model.Partido;
 import es.zinitri.urbamecanica.utils.Constants;
+import es.zinitri.urbamecanica.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
-    TextView TxtProxPartido;
-    TextView TxtFecha;
-    TextView TxtHora;
-    TextView TxtPabellon;
+    private TextView TxtProxPartido;
+    private TextView TxtFecha;
+    private TextView TxtHora;
+    private TextView TxtPabellon;
+    private String IDpabellon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        TxtProxPartido=(TextView)findViewById(R.id.txt_prox_partido);
+        TxtFecha=(TextView)findViewById(R.id.txt_fecha);
+        TxtHora=(TextView)findViewById(R.id.txt_hora);
+        TxtPabellon=(TextView)findViewById(R.id.txt_pabellon);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,20 +53,18 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        // Write a message to the database
+        /*Long iniSemanaTs = Utils.calcularIniFinSemana(fechaHoy,Constants.INICIO_SEMANA-Utils.getDayOfTheWeek(fechaHoy));
+        Long finSemanaTs = Utils.calcularIniFinSemana(fechaHoy,Utils.getDayOfTheWeek(fechaHoy)-Constants.FIN_SEMANA);
+        Log.e("lalala",tsFechaHoy.toString());
+        Log.e("lalala",finSemanaTs.toString());*/
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference RefPartido = database.getReference(Constants.FIREBASE_LOCATION_CALENDARIO+"/j1");
-        RefPartido.addValueEventListener(new ValueEventListener() {
+        DatabaseReference RefPartido = database.getReference(Constants.FIREBASE_LOCATION_CALENDARIO);
+        Query queryRef = RefPartido.orderByChild("fecha").startAt(Utils.tsFechaHoy).limitToFirst(1);
+        queryRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
                 // Get Post object and use the values to update the UI
                 Partido partido = dataSnapshot.getValue(Partido.class);
-
-                TxtProxPartido=(TextView)findViewById(R.id.txt_prox_partido);
-                TxtFecha=(TextView)findViewById(R.id.txt_fecha);
-                TxtHora=(TextView)findViewById(R.id.txt_hora);
-                TxtPabellon=(TextView)findViewById(R.id.txt_pabellon);
                 if(partido.isCasa())
                 {
                     TxtProxPartido.setText(Constants.EQUIPO + " - " + partido.getRival());
@@ -67,16 +76,33 @@ public class MainActivity extends AppCompatActivity {
                 TxtFecha.setText(partido.getFecha());
                 TxtHora.setText(partido.getHora());
                 TxtPabellon.setText(partido.getPabellon());
+                IDpabellon=partido.getPabellon();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                // Get Post object and use the values to update the UI
+                Partido partido = dataSnapshot.getValue(Partido.class);
+                TxtHora.setText(partido.getHora());
+                TxtPabellon.setText(partido.getPabellon());
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+
             }
-
         });
-
-        //myRef.setValue("Hello, World!");
     }
 
     @Override
@@ -100,4 +126,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
