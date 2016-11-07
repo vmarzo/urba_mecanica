@@ -1,5 +1,7 @@
 package es.zinitri.urbamecanica;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +32,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView TxtFecha;
     private TextView TxtHora;
     private TextView TxtPabellon;
+    private Button btnMapa;
     private String IDpabellon;
+    private Double latPabellon;
+    private Double longPabellon;
+    private String nombrePabellon;
 
 
     @Override
@@ -44,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         TxtFecha=(TextView)findViewById(R.id.txt_fecha);
         TxtHora=(TextView)findViewById(R.id.txt_hora);
         TxtPabellon=(TextView)findViewById(R.id.txt_pabellon);
+        btnMapa=(Button) findViewById(R.id.btn_mapa);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 TxtHora.setText(partido.getHora());
                 TxtPabellon.setText(partido.getPabellon());
                 IDpabellon=partido.getPabellon();
+                latPabellon=partido.getLatitud();
+                longPabellon=partido.getLongitud();
+                nombrePabellon=partido.getPabellon();
             }
 
             @Override
@@ -103,7 +114,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        btnMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                //intent.setData(Uri.parse("geo:"+latPabellon+","+longPabellon+"(hola)"));
+                intent.setData(Uri.parse("geo:0,0?q="+latPabellon+","+longPabellon+"("+nombrePabellon+")"));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
