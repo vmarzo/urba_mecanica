@@ -3,6 +3,7 @@ package es.zinitri.urbamecanica;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -58,8 +59,15 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String part=(String)TxtHora.getText();
+                String[] parts = part.split(":");
+                Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM)
+                        .putExtra(AlarmClock.EXTRA_MESSAGE, TxtProxPartido.getText())
+                        .putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(parts[0]))
+                        .putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(parts[1]));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
             }
         });
         /*Long iniSemanaTs = Utils.calcularIniFinSemana(fechaHoy,Constants.INICIO_SEMANA-Utils.getDayOfTheWeek(fechaHoy));
