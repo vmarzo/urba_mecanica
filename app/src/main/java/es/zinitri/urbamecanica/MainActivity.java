@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import es.zinitri.urbamecanica.model.Pabellon;
 import es.zinitri.urbamecanica.model.Partido;
 import es.zinitri.urbamecanica.utils.Constants;
 import es.zinitri.urbamecanica.utils.Utils;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Double latPabellon;
     private Double longPabellon;
     private String nombrePabellon;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
     @Override
@@ -50,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         TxtProxPartido=(TextView)findViewById(R.id.txt_prox_partido);
         TxtFecha=(TextView)findViewById(R.id.txt_fecha);
         TxtHora=(TextView)findViewById(R.id.txt_hora);
-        TxtPabellon=(TextView)findViewById(R.id.txt_pabellon);
         btnMapa=(Button) findViewById(R.id.btn_mapa);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         Long finSemanaTs = Utils.calcularIniFinSemana(fechaHoy,Utils.getDayOfTheWeek(fechaHoy)-Constants.FIN_SEMANA);
         Log.e("lalala",tsFechaHoy.toString());
         Log.e("lalala",finSemanaTs.toString());*/
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference RefPartido = database.getReference(Constants.FIREBASE_LOCATION_CALENDARIO);
         Query queryRef = RefPartido.orderByChild("fecha").startAt(Utils.tsFechaHoy).limitToFirst(1);
         queryRef.addChildEventListener(new ChildEventListener() {
@@ -83,11 +83,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 TxtFecha.setText(partido.getFecha());
                 TxtHora.setText(partido.getHora());
-                TxtPabellon.setText(partido.getPabellon());
                 IDpabellon=partido.getPabellon();
-                latPabellon=partido.getLatitud();
-                longPabellon=partido.getLongitud();
-                nombrePabellon=partido.getPabellon();
+                buscarPabellon(IDpabellon);
+
             }
 
             @Override
@@ -95,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 // Get Post object and use the values to update the UI
                 Partido partido = dataSnapshot.getValue(Partido.class);
                 TxtHora.setText(partido.getHora());
-                TxtPabellon.setText(partido.getPabellon());
+                IDpabellon=partido.getPabellon();
+                buscarPabellon(IDpabellon);
 
             }
 
@@ -119,11 +118,33 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                //intent.setData(Uri.parse("geo:"+latPabellon+","+longPabellon+"(hola)"));
                 intent.setData(Uri.parse("geo:0,0?q="+latPabellon+","+longPabellon+"("+nombrePabellon+")"));
+
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
+            }
+        });
+
+
+    }
+
+    public void buscarPabellon(String idPabellon)
+    {
+        TxtPabellon=(TextView)findViewById(R.id.txt_pabellon);
+        database.getReference(Constants.FIREBASE_LOCATION_PABELLON).child(idPabellon).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Pabellon pabellon = dataSnapshot.getValue(Pabellon.class);
+                latPabellon=pabellon.getLatitud();
+                longPabellon=pabellon.getLongitud();
+                nombrePabellon=pabellon.getNombre();
+                TxtPabellon.setText(nombrePabellon);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("getUser:onCancelled", databaseError.toException());
             }
         });
     }
