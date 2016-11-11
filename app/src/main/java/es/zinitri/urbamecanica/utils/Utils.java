@@ -2,6 +2,10 @@ package es.zinitri.urbamecanica.utils;
 
 
 
+import android.app.Application;
+import android.content.Intent;
+import android.net.Uri;
+
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,4 +32,5 @@ public class Utils {
         calendar.add(Calendar.DAY_OF_YEAR, dias);  // numero de días a añadir, o restar en caso de días<0
         return calendar.getTimeInMillis()/1000; // Devuelve el objeto Date con los nuevos días añadidos
     }
+
 }

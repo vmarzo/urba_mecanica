@@ -178,8 +178,12 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_correo) {
+            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+            sendIntent.setType("plain/text");
+            sendIntent.setData(Uri.parse("organizacion@mlasport.com"));
+            sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+            startActivity(sendIntent);
         }
 
         return super.onOptionsItemSelected(item);
