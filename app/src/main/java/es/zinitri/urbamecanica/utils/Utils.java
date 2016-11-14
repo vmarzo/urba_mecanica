@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.net.Uri;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -18,6 +20,7 @@ import java.util.GregorianCalendar;
 public class Utils {
     public static Date fechaHoy = new Date();
     public static Long tsFechaHoy = (fechaHoy.getTime()/1000);
+    //public static Long tsFechaHoy = Long.valueOf(1479501000);
 
     public static int getDayOfTheWeek(Date d){
         GregorianCalendar cal = new GregorianCalendar();
@@ -31,6 +34,19 @@ public class Utils {
         calendar.setTime(fecha); // Configuramos la fecha que se recibe
         calendar.add(Calendar.DAY_OF_YEAR, dias);  // numero de días a añadir, o restar en caso de días<0
         return calendar.getTimeInMillis()/1000; // Devuelve el objeto Date con los nuevos días añadidos
+    }
+
+    public static Long transformarFecha(String formato, String hora)
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+        Date parsedDate = null;
+        try {
+            parsedDate = dateFormat.parse(hora);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return (parsedDate.getTime()/1000);
     }
 
 }

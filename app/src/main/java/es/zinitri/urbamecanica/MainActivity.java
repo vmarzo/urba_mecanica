@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private Double latPabellon;
     private Double longPabellon;
     private String nombrePabellon;
+    private FloatingActionButton fab;
+    private int hora;
+    private int minutos;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
@@ -60,16 +63,14 @@ public class MainActivity extends AppCompatActivity {
         btnMapa=(Button) findViewById(R.id.btn_mapa);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String part=(String)TxtHora.getText();
-                String[] parts = part.split(":");
                 Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM)
                         .putExtra(AlarmClock.EXTRA_MESSAGE, TxtProxPartido.getText())
-                        .putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(parts[0])-1)
-                        .putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(parts[1]));
+                        .putExtra(AlarmClock.EXTRA_HOUR, (hora-1))
+                        .putExtra(AlarmClock.EXTRA_MINUTES, minutos);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
@@ -97,6 +98,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 TxtFecha.setText(partido.getFecha());
                 TxtHora.setText(partido.getHora());
+                String[] parts = partido.getHora().split(":");
+                hora=Integer.parseInt(parts[0]);
+                minutos=Integer.parseInt(parts[1]);
+                Long fechaPartido=(Utils.transformarFecha("hh:mm",partido.getHora())+Utils.transformarFecha("dd-MM-yyyy",partido.getFecha()));
+                if(Utils.tsFechaHoy>(fechaPartido-Constants.TIMESTAMP_UN_DIA) && Utils.tsFechaHoy<fechaPartido) {
+                    fab.setVisibility(View.VISIBLE);
+                }
                 IDpabellon=partido.getPabellon();
                 buscarPabellon(IDpabellon);
 
