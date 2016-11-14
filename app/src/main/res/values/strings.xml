@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Urba Mecanica</string>
     <string name="action_correo">Enviar correo</string>
-    <string name="btn_mapa">¿Cómo llegar?</string>
-    <string name="fecha">Fecha:</string>
-    <string name="hora">Hora:</string>
-    <string name="pabellon">Pabellon:</string>
+    <string name="btn_mapa">¿COMO LLEGAR?</string>
+    <string name="fecha">Fecha: </string>
+    <string name="hora">Hora: </string>
+    <string name="pabellon">Pabellon: </string>
 </resources>

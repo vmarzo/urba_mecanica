@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 String[] parts = part.split(":");
                 Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM)
                         .putExtra(AlarmClock.EXTRA_MESSAGE, TxtProxPartido.getText())
-                        .putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(parts[0]))
+                        .putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(parts[0])-1)
                         .putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(parts[1]));
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
         Log.e("lalala",tsFechaHoy.toString());
         Log.e("lalala",finSemanaTs.toString());*/
         DatabaseReference RefPartido = database.getReference(Constants.FIREBASE_LOCATION_CALENDARIO);
-        Query queryRef = RefPartido.orderByChild("fecha").startAt(Utils.tsFechaHoy).limitToFirst(1);
+        Query queryRef = RefPartido.orderByChild("fecha").startAt(Utils.tsFechaHoy-Constants.TIMESTAMP_UN_DIA).limitToFirst(1);
+        System.out.println(Utils.tsFechaHoy-Constants.TIMESTAMP_UN_DIA);
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {

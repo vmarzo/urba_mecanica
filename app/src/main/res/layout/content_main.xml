@@ -14,16 +14,17 @@
     tools:showIn="@layout/activity_main">
 
     <TextView
+        android:layout_marginTop="32dp"
         android:id="@+id/txt_prox_partido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        style="@style/head_prox_partido"
         android:text="-" />
     <LinearLayout
         android:id="@+id/fila_fecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         android:orientation="horizontal"
         android:weightSum="1">
         <TextView
@@ -83,8 +84,9 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         android:text="@string/btn_mapa"
+        style="@style/boton"
         android:layout_below="@id/fila_pabellon"/>
     />
 </RelativeLayout>

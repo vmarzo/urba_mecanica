@@ -23,7 +23,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.e("FIREBASE", remoteMessage.getNotification().getBody());
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.drawable.ic_stat_um3)
                         .setContentTitle("Urba Mecánica")
                         .setContentText(remoteMessage.getNotification().getBody());
 
