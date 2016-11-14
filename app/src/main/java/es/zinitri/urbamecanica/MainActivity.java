@@ -98,15 +98,19 @@ public class MainActivity extends AppCompatActivity {
                 }
                 TxtFecha.setText(partido.getFecha());
                 TxtHora.setText(partido.getHora());
-                String[] parts = partido.getHora().split(":");
-                hora=Integer.parseInt(parts[0]);
-                minutos=Integer.parseInt(parts[1]);
-                Long fechaPartido=(Utils.transformarFecha("hh:mm",partido.getHora())+Utils.transformarFecha("dd-MM-yyyy",partido.getFecha()));
-                if(Utils.tsFechaHoy>(fechaPartido-Constants.TIMESTAMP_UN_DIA) && Utils.tsFechaHoy<fechaPartido) {
-                    fab.setVisibility(View.VISIBLE);
+                if(!partido.getHora().equals("")) {
+                    String[] parts = partido.getHora().split(":");
+                    hora=Integer.parseInt(parts[0]);
+                    minutos=Integer.parseInt(parts[1]);
+                    Long fechaPartido=(Utils.transformarFecha("hh:mm",partido.getHora())+Utils.transformarFecha("dd-MM-yyyy",partido.getFecha()));
+                    if(Utils.tsFechaHoy>(fechaPartido-Constants.TIMESTAMP_UN_DIA) && Utils.tsFechaHoy<fechaPartido) {
+                        fab.setVisibility(View.VISIBLE);
+                    }
                 }
-                IDpabellon=partido.getPabellon();
-                buscarPabellon(IDpabellon);
+                if(!partido.getPabellon().equals("")){
+                    IDpabellon=partido.getPabellon();
+                    buscarPabellon(IDpabellon);
+                }
 
             }
 
