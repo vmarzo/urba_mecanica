@@ -12,19 +12,24 @@ import android.widget.Toast;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import es.zinitri.urbamecanica.utils.Constants;
+
+
 /**
  * Created by victor on 9/11/16.
+ * Captura la notificacion de Firebase cuando estas dentro de la aplicacion y la vuelve a enviar
+ * para que se muestre en la barra de notificaciones
  */
+
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.e("FIREBASE", remoteMessage.getNotification().getBody());
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_stat_um3)
-                        .setContentTitle("Urba Mecánica")
+                        .setContentTitle(Constants.EQUIPO)
                         .setContentText(remoteMessage.getNotification().getBody());
 
         Intent notIntent = new Intent(this, MainActivity.class);

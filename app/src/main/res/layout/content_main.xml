@@ -86,6 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="@string/btn_mapa"
+        android:enabled="false"
         style="@style/boton"
         android:layout_below="@id/fila_pabellon"/>
     />
