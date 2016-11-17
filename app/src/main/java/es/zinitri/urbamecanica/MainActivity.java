@@ -203,11 +203,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Acceder a al correo para poder un correo a la organizacion de la liga
         if (id == R.id.action_correo) {
-            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-            sendIntent.setType("plain/text");
-            sendIntent.setData(Uri.parse("organizacion@mlasport.com"));
-            sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-            startActivity(sendIntent);
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "organizacion@mlasport.com" });
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
         }
 
         return super.onOptionsItemSelected(item);
