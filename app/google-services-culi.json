@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1054518504314",
+    "firebase_url": "https://culigaris.firebaseio.com",
+    "project_id": "culigaris",
+    "storage_bucket": "culigaris.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054518504314:android:9fb5edab94317938",
+        "android_client_info": {
+          "package_name": "es.zinitri.urbamecanica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054518504314-fn6c6g0p48ecdud8a7026iot123freq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyiqaIaQ4MrQSRJhU3PddLVKBviSuO-cU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

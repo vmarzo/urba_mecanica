@@ -28,7 +28,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_stat_um3)
+                        .setSmallIcon(R.mipmap.ic_launcher_culi)
                         .setContentTitle(Constants.EQUIPO)
                         .setContentText(remoteMessage.getNotification().getBody());
 

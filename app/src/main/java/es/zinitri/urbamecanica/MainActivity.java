@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import es.zinitri.urbamecanica.model.Pabellon;
 import es.zinitri.urbamecanica.model.Partido;
@@ -71,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        FirebaseMessaging.getInstance().subscribeToTopic(Constants.CODIGO_EQUIPO);
         //Conexion a los partidos del calendario
-        DatabaseReference RefPartido = database.getReference(Constants.FIREBASE_LOCATION_CALENDARIO);
+        DatabaseReference RefPartido = database.getReference(Constants.CODIGO_EQUIPO+"/"+Constants.FIREBASE_LOCATION_CALENDARIO);
         //Consulta para recuperar el proximo partido del partido. Se resta un dia al dia de hoy para que el mismo dia del partido siga apareciendo
         Query queryRef = RefPartido.orderByChild("fecha").startAt(Utils.tsFechaHoy-Constants.TIMESTAMP_UN_DIA).limitToFirst(1);
         queryRef.addChildEventListener(new ChildEventListener() {
